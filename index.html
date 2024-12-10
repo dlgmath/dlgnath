@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLG MATH</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>DLG MATH</h1>
+        <nav>
+            <ul>
+                <li><a href="/">მთავარი გვერი</a></li>
+                <li><a href="/themes">თემები</a></li>
+                <li><a href="/examples">მაგალითები</a></li>
+                <li><a href="/tests">ტესტი</a></li>
+                <li><a href="/answers">პასუხები</a></li>
+                {% if 'username' in session %}
+                    <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">login</a></li>
+                    <li><a href="{{ url_for('register') }}">Registration</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        {% if 'username' in session %}
+            <h2>მოგესალმებით, {{ session['username'] }}!</h2>
+            <p>ჩვენს ვებგვერდზე შეგიძლიათ მათემატიკური თემების შესწავლა, ამოცანების ამოხსნა, ტესტების გავლა და თქვენი ცოდნის შემოწმება.</p>
+            <p>აირჩიეთ განყოფილება:</p>
+            <ul>
+                <li><a href="/themes">თემები მათემატიკაში</a></li>
+                <li><a href="/examples">ამოცანების მაგალითები</a></li>
+                <li><a href="/tests">ტესტი</a></li>
+                <li><a href="/answers">პასუხები ტესტებზე</a></li>
+            </ul>
+        {% else %}
+            <h2>გასაგრძელებლად გთხოვთ შეხვიდეთ სისტემაში ან დარეგისტრირდეთ.</h2>
+        {% endif %}
+    </section>
+
+    <footer>
+        <p>© 2024 DLG MATH</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
